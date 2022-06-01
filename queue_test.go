@@ -15,7 +15,7 @@ var (
 )
 
 func TestQueue(t *testing.T) {
-	var q *Queue[int] = NewQueue(8, value)
+	var q *Queue[int] = NewQueue[int](8)
 	ok, quantity := q.Put(&value)
 	if !ok {
 		t.Error("TestStack Get.Fail")
@@ -147,7 +147,7 @@ func testQueuePutGet(t *testing.T, grp, cnt int) (
 	var wg sync.WaitGroup
 	var id int32
 	wg.Add(grp)
-	var q *Queue[string] = NewQueue(1024*1024, "")
+	var q *Queue[string] = NewQueue[string](1024 * 1024)
 	start := time.Now()
 	for i := 0; i < grp; i++ {
 		go func(g int) {
@@ -197,7 +197,7 @@ func testQueueGeneral(t *testing.T, grp, cnt int) int {
 	var miss int32
 
 	wg.Add(grp)
-	var q *Queue[string] = NewQueue(1024*1024, "")
+	var q *Queue[string] = NewQueue[string](1024 * 1024)
 	for i := 0; i < grp; i++ {
 		go func(g int) {
 			defer wg.Done()
@@ -281,7 +281,7 @@ func testQueuePutGoGet(t *testing.T, grp, cnt int) int {
 	var wg sync.WaitGroup
 	//var Qt = newQtSum(grp)
 	wg.Add(grp)
-	var q *Queue[int] = NewQueue(1024*1024, value)
+	var q *Queue[int] = NewQueue[int](1024 * 1024)
 	for i := 0; i < grp; i++ {
 		go func(g int) {
 			ok := false
@@ -339,7 +339,7 @@ func testQueuePutDoGet(t *testing.T, grp, cnt int) int {
 	var wg sync.WaitGroup
 	//var Qt = newQtSum(grp)
 	wg.Add(grp)
-	var q *Queue[int] = NewQueue(1024*1024, value)
+	var q *Queue[int] = NewQueue[int](1024 * 1024)
 	for i := 0; i < grp; i++ {
 		go func(g int) {
 			ok := false
@@ -390,7 +390,7 @@ func testQueuePutGetOrder(t *testing.T, grp, cnt int) (
 	var wg sync.WaitGroup
 	var idPut, idGet int32
 	wg.Add(grp)
-	var q *Queue[int32] = NewQueue(1024*1024, int32(1))
+	var q *Queue[int32] = NewQueue[int32](1024 * 1024)
 	for i := 0; i < grp; i++ {
 		go func(g int) {
 			defer wg.Done()

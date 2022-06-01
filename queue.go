@@ -22,7 +22,7 @@ type Queue[T any] struct {
 	cache    []Cache[*T]
 }
 
-func NewQueue[T any](capacity uint32, prototype T) *Queue[T] {
+func NewQueue[T any](capacity uint32) *Queue[T] {
 	q := new(Queue[T])
 	q.capacity = minQuantity(capacity)
 	q.capMod = q.capacity - 1
